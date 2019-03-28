@@ -16,15 +16,6 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
  */
 public class CodeGenerator
 {
-	/**
-	 * @Fields tables : 需生成文件对应的表名数组（按需更变）
-	 */
-	private static final String[] TABLE_NAMES = new String[] { "wo_close", "wo_detail" };
-
-	/**
-	 * @Fields tables : 生成文件所在包名（按需更变）
-	 */
-	private static final String PACKAGE_NAME = "com.timor";
 
 	public static void main(String[] args)
 	{
@@ -33,17 +24,16 @@ public class CodeGenerator
 
 		/*-- 全局配置 --*/
 		GlobalConfig gc = new GlobalConfig();
-		gc.setOutputDir("D://CodeGenerator//");
-		gc.setAuthor("YuanZhe");
+		gc.setOutputDir(ConfigInfo.OUTPUT_DIR);
+		gc.setAuthor(ConfigInfo.AUTHOR);
 		mpg.setGlobalConfig(gc);
 
 		/*-- 数据源配置 --*/
-		// TODO 按需更变
 		DataSourceConfig dsc = new DataSourceConfig();
-		dsc.setUrl("");
-		dsc.setDriverName("com.mysql.jdbc.Driver");
-		dsc.setUsername("");
-		dsc.setPassword("");
+		dsc.setUrl(ConfigInfo.URL);
+		dsc.setDriverName(ConfigInfo.DRIVER_NAME);
+		dsc.setUsername(ConfigInfo.USERNAME);
+		dsc.setPassword(ConfigInfo.PASSWORD);
 		mpg.setDataSource(dsc);
 
 		/*-- 数据库表配置 --*/
@@ -51,13 +41,13 @@ public class CodeGenerator
 		strategy.setNaming(NamingStrategy.underline_to_camel);
 		strategy.setColumnNaming(NamingStrategy.underline_to_camel);
 		strategy.setRestControllerStyle(true);
-		strategy.setInclude(TABLE_NAMES);
+		strategy.setInclude(ConfigInfo.TABLE_NAMES);
 		strategy.setControllerMappingHyphenStyle(true);
 		mpg.setStrategy(strategy);
 
 		/*-- 包配置 --*/
 		PackageConfig pc = new PackageConfig();
-		pc.setParent(PACKAGE_NAME);
+		pc.setParent(ConfigInfo.PACKAGE_NAME);
 		mpg.setPackageInfo(pc);
 
 		/*-- 采用 Freemarker 模板引擎（默认 Velocity） --*/
